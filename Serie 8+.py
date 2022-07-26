@@ -48,7 +48,7 @@ import random
 ##### function we evaluate ####
 
 def function(x):
-    return np.sin(x)
+    return np.cos(x)
 
 #### variables ####
 
@@ -57,12 +57,13 @@ if (samplesize % 2) != 0:
     raise ValueError('Samplesize not divisible by 2!')
 lambdavar = 5
 
-
+treenumber = 10
 #### Data ####
 
 xRand = np.sort(np.random.uniform(0, 2*np.pi, samplesize))
 yRand = function(xRand)
 yRandNoised = np.random.normal(0, 0.01, samplesize) + yRand
+plt.pyplot.plot(xRand, treenumber*yRandNoised, color = "blue")
 
 xErrors = []
 minError = 0
@@ -488,7 +489,7 @@ def average(xData, yData):
             slope = (yData[i][index] - yData[i][index-1])/(xData[i][index] - xData[i][index-1])
             y += yData[i][index-1] + slope*(value - xData[i][index-1])
         newY.append(y)
-    plt.pyplot.plot(newX, newY, color = 'pink')
+    plt.pyplot.plot(newX, newY, color = 'red')
     print(len(newX))
     print(newX)
 ### Tree
@@ -524,6 +525,6 @@ class RandForest(object):
             #plt.pyplot.plot(node.xVal, node.yFinal)
         
                
-Forest = RandForest(10)
+Forest = RandForest(treenumber)
 average(Forest.xData, Forest.yData)
 
